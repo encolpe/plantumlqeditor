@@ -401,6 +401,16 @@ void MainWindow::onAutoRefreshActionToggled(bool state)
     m_autoRefreshLabel->setEnabled(state);
 }
 
+void MainWindow::onWordWrapModeToggled(bool state)
+{
+    if (state) {
+        m_editor->setWordWrapMode(QTextOption::WordWrap);
+    } else {
+        m_editor->setWordWrapMode(QTextOption::NoWrap);
+    }
+}
+
+
 void MainWindow::onEditorChanged()
 {
     if (!refreshFromCache()) m_needsRefresh = true;
@@ -642,6 +652,7 @@ void MainWindow::readSettings(bool reload)
                                                 SETTINGS_EDITOR_INDENT_WITH_SPACE_DEFAULT).toBool());
     m_editor->setIndentSize(settings.value(SETTINGS_EDITOR_INDENT_SIZE,
                                            SETTINGS_EDITOR_INDENT_SIZE_DEFAULT).toInt());
+    m_editor->setWordWrapMode(QTextOption::NoWrap);
 
     m_refreshOnSave = settings.value(SETTINGS_EDITOR_REFRESH_ON_SAVE, SETTINGS_EDITOR_REFRESH_ON_SAVE_DEFAULT).toBool();
 
@@ -900,6 +911,10 @@ void MainWindow::createActions()
     m_showStatusBarAction = new QAction(tr("Show statusbar"), this);
     m_showStatusBarAction->setCheckable(true);
 
+    m_wordWrapModeAction = new QAction(tr("Word Wrap"), this);
+    m_wordWrapModeAction->setCheckable(true);
+    connect(m_wordWrapModeAction, SIGNAL(toggled(bool)), this, SLOT(onWordWrapModeToggled(bool)));
+
     m_preferencesAction = new QAction(QIcon::fromTheme("preferences-other"), tr("Preferences"), this);
     connect(m_preferencesAction, SIGNAL(triggered()), this, SLOT(onPreferencesActionTriggered()));
 
@@ -973,6 +988,7 @@ void MainWindow::createMenus()
     m_settingsMenu->addAction(m_showAssistantDockAction);
     m_settingsMenu->addAction(m_showAssistantInfoDockAction);
     m_settingsMenu->addAction(m_showEditorDockAction);
+    m_settingsMenu->addAction(m_wordWrapModeAction);
     m_settingsMenu->addSeparator();
     m_settingsMenu->addAction(m_pngPreviewAction);
     m_settingsMenu->addAction(m_svgPreviewAction);
@@ -1004,6 +1020,8 @@ void MainWindow::createToolBars()
     m_mainToolBar->addAction(m_showAssistantDockAction);
     m_mainToolBar->addAction(m_showAssistantInfoDockAction);
     m_mainToolBar->addAction(m_showEditorDockAction);
+    m_mainToolBar->addSeparator();
+    m_mainToolBar->addAction(m_wordWrapModeAction);
     m_mainToolBar->addSeparator();
     m_mainToolBar->addAction(m_undoAction);
     m_mainToolBar->addAction(m_redoAction);

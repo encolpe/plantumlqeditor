@@ -61,6 +61,7 @@ private slots:
     void copyImage();
 
     void onAutoRefreshActionToggled(bool state);
+    void onWordWrapModeToggled(bool state);
     void onEditorChanged();
     void onRefreshActionTriggered();
     void onPreferencesActionTriggered();
@@ -179,6 +180,7 @@ private:
     QAction *m_showEditorDockAction;
     QAction *m_showMainToolbarAction;
     QAction *m_showStatusBarAction;
+    QAction *m_wordWrapModeAction;
     QAction *m_pngPreviewAction;
     QAction *m_svgPreviewAction;
     QAction *m_autoRefreshAction;
