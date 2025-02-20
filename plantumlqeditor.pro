@@ -36,7 +36,9 @@ FORMS += \
     preferencesdialog.ui \
     logdialog.ui
 
-TRANSLATIONS += translations/plantumlqeditor_ru.ts
+TRANSLATIONS += \
+    translations/plantumlqeditor_ru.ts \
+    translations/plantumlqeditor_zh_CN.ts
 
 OTHER_FILES += \
     assistant.svg \

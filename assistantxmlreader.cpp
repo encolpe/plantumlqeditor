@@ -192,7 +192,7 @@ void AssistantXmlReader::readAssistantElement()
         }
 
         if (m_reader.isStartElement()) {
-            if (m_reader.name() == "item") {
+            if (m_reader.name() == QString("item")) {
                 readAssistantItemElement(assistant);
             } else {
                 skipUnknownElement();
@@ -217,7 +217,7 @@ void AssistantXmlReader::readAssistantItemElement(Assistant *assistant)
         }
 
         if (m_reader.isStartElement()) {
-            if (m_reader.name() == "notes") {
+            if (m_reader.name() == QString("notes")) {
                 QString tmp = removeWhiteSpace(readAssistantItemNotes());
                 if (!tmp.isEmpty()) {
                     notes << tmp;

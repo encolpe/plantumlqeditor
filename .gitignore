@@ -1,6 +1,7 @@
 *.user
 *-build-*
 *.qm
+build
 *.o
 *.cpp
 *.h
